@@ -7,6 +7,8 @@ var Site = require('dw/system/Site');
 var StringUtils = require('dw/util/StringUtils');
 var Calendar = require('dw/util/Calendar');
 
+var currentSite = Site.getCurrent();
+
 /**
  * Writes a URL element to the sitemap.
  * @param {dw.io.XMLIndentingStreamWriter} xmlWriter - The writer
@@ -31,10 +33,10 @@ function writeSiteMapUrlElement(xmlWriter, loc, changefreq, priority) {
 
     xmlWriter.writeStartElement('url');
 
-    writeSitemapURLElement('loc', loc);
-    writeSitemapURLElement('lastmod', lastMod);
-    writeSitemapURLElement('changefreq', changefreq);
-    writeSitemapURLElement('priority', priority);
+    writeSitemapURLElement(xmlWriter, 'loc', loc);
+    writeSitemapURLElement(xmlWriter, 'lastmod', lastMod);
+    writeSitemapURLElement(xmlWriter, 'changefreq', changefreq);
+    writeSitemapURLElement(xmlWriter, 'priority', priority);
 
     xmlWriter.writeEndElement();
 }
@@ -52,7 +54,6 @@ function writeXML(fileToSave, dynamicURLs) {
         var FileWriter = require('dw/io/FileWriter');
         var XMLIndentingStreamWriter = require('dw/io/XMLIndentingStreamWriter');
 
-        var currentSite = Site.getCurrent();
         var locales = currentSite.allowedLocales.iterator();
         var fileWriter = new FileWriter(fileToSave, 'UTF-8');
         var xmlWriter = new XMLIndentingStreamWriter(fileWriter);
@@ -68,7 +69,7 @@ function writeXML(fileToSave, dynamicURLs) {
             request.setLocale(currentLocale);
 
             dynamicURLs.forEach(function (dynamicURL) {
-                writeSiteMapUrlElement(xmlWriter, currentSite.getHttpsHostName() + dynamicURL.path, 'daily', '0.5');
+                writeSiteMapUrlElement(xmlWriter, 'https://' + currentSite.getHttpsHostName() + dynamicURL.path, 'weekly', '0.5');
             });
         }
 
@@ -80,6 +81,8 @@ function writeXML(fileToSave, dynamicURLs) {
 
         return true;
     } catch (e) {
+        var Logger = require('dw/system/Logger');
+        Logger.error(e);
         return false;
     }
 }
@@ -91,16 +94,17 @@ function writeXML(fileToSave, dynamicURLs) {
  * @returns {dw.system.Status} - The result status
  */
 function generateSitemap(args) {
-    var directoryToSaveIn = new File(args.directory);
-    var fileToSave = new File(directoryToSaveIn, args.fileName);
+    var directoryToSaveIn = new File(File.IMPEX + File.SEPARATOR + args.directory);
     var dynamicURLs = DynamicURLMgr.getAllDynamicURLs();
 
     if (!directoryToSaveIn.exists()) {
         directoryToSaveIn.mkdirs();
     }
 
+    var fileToSave = new File(directoryToSaveIn, currentSite.name + '-' + args.fileName);
+
     if (!writeXML(fileToSave, dynamicURLs)) {
-        return new Status(Status.ERROR, 'Was unable to write file.');
+        return new Status(Status.ERROR, 'ERROR');
     }
 
 

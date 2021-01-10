@@ -2,7 +2,7 @@
 
 var DYNAMIC_URL = 'DynamicUrl';
 var CustomObjectMgr = require('dw/object/CustomObjectMgr');
-var DynamicURL = require('*/cartridge/models/DynamicURL');
+var DynamicURL = require('../../models/DynamicURL');
 
 /**
  * Fetches a Dynamic URL based on the configured source.

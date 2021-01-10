@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="Sitemap - Dynamic URL" priority="0">
+        <description/>
+        <parameters/>
+        <split sequential="false">
+            <contexts template-ref="template_65">
+                <all-storefront-sites/>
+            </contexts>
+            <flow-template template-id="template_65">
+                <step step-id="Generate Sitemap" type="custom.taurgis.GenerateSitemap" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="directory">src/sitemap</parameter>
+                        <parameter name="fileName">dynamicurls.xml</parameter>
+                    </parameters>
+                </step>
+            </flow-template>
+        </split>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="add-custom-sitemap" type="custom.taurgis.AddCustomSitemap" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="hostName">myhost.com</parameter>
+                    <parameter name="sourceDirectory">src/sitemap</parameter>
+                    <parameter name="filePattern">RefArch-.+</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2021-01-10Z</date>
+                <time>15:48:23.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+</jobs>

@@ -15,20 +15,25 @@ function addCustomSitemap(args) {
         return new Status(Status.ERROR, 'ERROR');
     }
 
-    var sourceDirectory = new File(args.sourceDirectory);
+    var sourceDirectory = new File(File.IMPEX + File.SEPARATOR + args.sourceDirectory);
 
     if (!sourceDirectory.exists()) {
         sourceDirectory.mkdirs();
     }
 
-    if(sourceDirectory.isDirectory()) {
+    if (sourceDirectory.isDirectory()) {
         var fileList = sourceDirectory.listFiles().iterator();
         var filePatternRegex = new RegExp(args.filePattern);
         while (fileList.hasNext()) {
             var file = fileList.next();
 
             if (filePatternRegex.test(file.name)) {
-                SitemapMgr.addCustomSitemapFile(args.hostName, file);
+                var Transaction = require('dw/system/Transaction');
+
+                // eslint-disable-next-line no-loop-func
+                Transaction.wrap(function () {
+                    SitemapMgr.addCustomSitemapFile(args.hostName, file);
+                });
             }
         }
     } else {
