@@ -2,7 +2,7 @@
 
 var DYNAMIC_URL = 'DynamicUrl';
 var CustomObjectMgr = require('dw/object/CustomObjectMgr');
-var DynamicURL = require('*/cartridge/models/DynamicURL');
+var DynamicURL = require('../../models/DynamicURL');
 
 /**
  * Fetches a Dynamic URL based on the configured source.
@@ -20,6 +20,22 @@ function getDynamicURL(path) {
     return null;
 }
 
+/**
+ * Fetches all configured Dynamic URLs
+ * @returns {[Object]} - The list of Dynamic URLS
+ */
+function getAllDynamicURLs() {
+    var dynamicUrls = [];
+    var customObjects = CustomObjectMgr.getAllCustomObjects(DYNAMIC_URL);
+
+    while (customObjects.hasNext()) {
+        dynamicUrls.push(new DynamicURL(customObjects.next()));
+    }
+
+    return dynamicUrls;
+}
+
 module.exports = {
-    getDynamicURL: getDynamicURL
+    getDynamicURL: getDynamicURL,
+    getAllDynamicURLs: getAllDynamicURLs
 };
