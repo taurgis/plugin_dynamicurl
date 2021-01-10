@@ -30,6 +30,9 @@ This solution makes use of a Custom Object Type called "DynamicUrl". Import this
 8. Fill in the ID of the Content Asset or the Page Designer Page ID in the Content ID field
 9. Try it out!
 
+# Job
+A sample job has been included in the metadata folder called ```metadata/dynamic-url-jobs.xml```. This can be imported through the business manager.
+
 # Getting Started
 
 1. Clone this repository. (The name of the top-level folder is plugin\_commercepayments.)
