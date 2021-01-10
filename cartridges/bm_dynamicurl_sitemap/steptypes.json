@@ -1,0 +1,48 @@
+{
+  "step-types": {
+    "script-module-step": [
+      {
+        "@type-id": "custom.taurgis.AddCustomSitemap",
+        "module": "bm_dynamicurl_sitemap/cartridge/scripts/steps/addCustomSitemap.js",
+        "function": "addCustomSitemap",
+        "parameters": {
+          "parameters": [
+            {
+              "@name": "hostName",
+              "@description": "Hostname to use for the sitemap file.",
+              "@type": "string",
+              "@required": true,
+              "@trim": true
+            },
+            {
+              "@name": "sourceDirectory",
+              "@description": "Source directory for the file to add.",
+              "@type": "string",
+              "@required": true,
+              "@trim": true
+            },
+            {
+              "@name": "filePattern",
+              "@description": "File pattern to use in the given source directory.",
+              "@type": "string",
+              "@required": true,
+              "@trim": true
+            },
+          ]
+        },
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Sitemap linking failed."
+            },
+            {
+              "@code": "OK",
+              "description": "Sitemap linked successfully."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
