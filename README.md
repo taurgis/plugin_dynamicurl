@@ -5,6 +5,8 @@ This is the repository for the plugin_dynamicurl plugin. This plugin enhances th
 * Give full control to content URLs
 * No longer need for the ID in the URL
 
+_Note: This is a POC project, so it is not finished and will not work for every project out of the box. It is simply a starting point._
+
 # Demo
 TO DO
 
@@ -18,7 +20,7 @@ plugin_dynamicurl:app_storefront_base
 # Custom Object
 This solution makes use of a Custom Object Type called "DynamicUrl". Import this in the business manager.
 
-1. Upload file ```metadata/dynamic-url.xml``` in Admin > Site Development > Import & Export > Upload
+1. Upload file ```metadata/dynamic-url-object.xml``` in Admin > Site Development > Import & Export > Upload
 2. Import the file using Meta Data
 3. Create a new Dynamic URL by going to "Merchant Tools" > "Custom Objects" > "Custom Object Editor"
 4. Select the type "DynamicUrl"
@@ -27,6 +29,9 @@ This solution makes use of a Custom Object Type called "DynamicUrl". Import this
 7. Select the type of content (currently type doesn't matter)
 8. Fill in the ID of the Content Asset or the Page Designer Page ID in the Content ID field
 9. Try it out!
+
+# Job
+A sample job has been included in the metadata folder called ```metadata/dynamic-url-jobs.xml```. This can be imported through the business manager.
 
 # Getting Started
 
