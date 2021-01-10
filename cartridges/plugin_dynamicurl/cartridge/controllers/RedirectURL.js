@@ -13,7 +13,7 @@ server.extend(base);
  * First checks if there is a Dynamic URL available before redirecting to the default behaviour. If a
  * URL is configured, it will be shown.
  */
-server.prepend('Start', function(req, res, next) {
+server.prepend('Start', function (req, res, next) {
     var ISML = require('dw/template/ISML');
     var RedirectMgr = require('dw/web/URLRedirectMgr');
     var DynamicURLMgr = require('*/cartridge/scripts/managers/DynamicURLMgr');
