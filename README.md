@@ -17,6 +17,13 @@ The plugin_dynamicurl plugin requires the app\_storefront\_base cartridge. In yo
 plugin_dynamicurl:app_storefront_base
 ```
 
+The cartridge bm_dynamicurl_sitemap needs to be assigned to the business manager site. In your cartridge path, include the cartridges in the following order:
+
+```
+bm_dynamicurl_sitemap:bm_app_storefront_base
+```
+
+
 # Custom Object
 This solution makes use of a Custom Object Type called "DynamicUrl". Import this in the business manager.
 
