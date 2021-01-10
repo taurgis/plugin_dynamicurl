@@ -42,6 +42,41 @@
             }
           ]
         }
+      },
+      {
+        "@type-id": "custom.taurgis.GenerateSitemap",
+        "module": "bm_dynamicurl_sitemap/cartridge/scripts/steps/generateSitemap.js",
+        "function": "generateSitemap",
+        "parameters": {
+          "parameters": [
+            {
+              "@name": "directory",
+              "@description": "Directory to save the file in.",
+              "@type": "string",
+              "@required": true,
+              "@trim": true
+            },
+            {
+              "@name": "fileName",
+              "@description": "File name to use in the given source directory.",
+              "@type": "string",
+              "@required": true,
+              "@trim": true
+            },
+          ]
+        },
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Sitemap generation failed."
+            },
+            {
+              "@code": "OK",
+              "description": "Sitemap generated successfully."
+            }
+          ]
+        }
       }
     ]
   }

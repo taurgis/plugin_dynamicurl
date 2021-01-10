@@ -5,11 +5,10 @@ var SitemapMgr = require('dw/sitemap/SitemapMgr');
 var File = require('dw/io/File');
 
 /**
- * Register generated sitemap xml so the platform can index them
+ * Add custome sitemap to the host sitemaps.
  *
- * @param {dw.util.HashMap} args
- * @param {dw.job.JobStepExecution} jobStepExecution
- * @returns {dw.system.Status}
+ * @param {dw.util.HashMap} args - The job arguments
+ * @returns {dw.system.Status} - The result status
  */
 function addCustomSitemap(args) {
     if (empty(args.hostName) || empty(args.sourceDirectory) || empty(args.filePattern)) {
