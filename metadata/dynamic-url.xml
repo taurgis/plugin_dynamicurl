@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+   <custom-type type-id="DynamicUrl">
+        <display-name xml:lang="x-default">Dynamic URL</display-name>
+        <description xml:lang="x-default">The Dynamic URL configurations.</description>
+        <staging-mode>source-to-target</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="ID">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="contentID">
+                <display-name xml:lang="x-default">Content ID</display-name>
+                <description xml:lang="x-default">The content asset ID or Page Designer page ID.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="path">
+                <display-name xml:lang="x-default">Path</display-name>
+                <description xml:lang="x-default">The path that should be used. (e.g. /my-custom-url or /dir/my-custom-url)</description>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="type">
+                <display-name xml:lang="x-default">Type</display-name>
+                <description xml:lang="x-default">The type of content that should be loaded.</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Content Asset</display>
+                        <value>CA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Page Designer Page</display>
+                        <value>PD</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="general">
+                <display-name xml:lang="x-default">General</display-name>
+                <attribute attribute-id="ID"/>
+            </attribute-group>
+            <attribute-group group-id="URLSettings">
+                <display-name xml:lang="x-default">URL Settings</display-name>
+                <attribute attribute-id="type"/>
+                <attribute attribute-id="contentID"/>
+                <attribute attribute-id="path"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+</metadata>
