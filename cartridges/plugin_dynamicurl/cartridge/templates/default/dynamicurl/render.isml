@@ -1,1 +1,5 @@
-<isinclude url="${URLUtils.url('Page-ShowDynamicURL', 'cid', pdict.dynamicURL.contentID)}" sf-toolkit="on" />
+<isif condition="${pdict.dynamicURL}">
+    <isinclude url="${URLUtils.url(pdict.action, 'cid', pdict.dynamicURL.contentID)}" sf-toolkit="on" />
+<iselse />
+    <isinclude url="${URLUtils.url(pdict.action)}" sf-toolkit="on" />
+</isif>

@@ -14,18 +14,30 @@ server.extend(base);
  * URL is configured, it will be shown.
  */
 server.prepend('Start', function (req, res, next) {
-    var ISML = require('dw/template/ISML');
-    var RedirectMgr = require('dw/web/URLRedirectMgr');
-    var DynamicURLMgr = require('*/cartridge/scripts/managers/DynamicURLMgr');
-    var location = RedirectMgr.getRedirectOrigin();
-    var dynamicURL = DynamicURLMgr.getDynamicURL(location);
+    var { renderTemplate } = require('dw/template/ISML');
+    var { getRedirectOrigin, getRedirect } = require('dw/web/URLRedirectMgr');
+    var { getDynamicURL } = require('*/cartridge/scripts/managers/DynamicURLMgr');
+
+    var redirectOrigin = getRedirectOrigin();
+    var dynamicURL = getDynamicURL(redirectOrigin);
 
     if (dynamicURL) {
-        ISML.renderTemplate('dynamicurl/render', {
-            dynamicURL: dynamicURL
+        renderTemplate('dynamicurl/render', {
+            dynamicURL: dynamicURL,
+            action: 'Page-ShowDynamicURL'
         });
     } else {
-        next();
+        var redirect = getRedirect();
+        var location = redirect ? redirect.location : null;
+
+        if (!location) {
+            res.setStatusCode(404);
+            renderTemplate('dynamicurl/render', {
+                action: 'Home-ErrorNotFoundInclude'
+            });
+        } else {
+            next();
+        }
     }
 });
 
