@@ -4,9 +4,9 @@
   "description": "Allow you to make any url show a content page.",
   "main": "index.js",
   "scripts": {
-    "lint": "sgmf-scripts --lint js && sgmf-scripts --lint css",
+    "lint": "sgmf-scripts --lint js && ./node_modules/.bin/isml-linter",
     "upload": "sgmf-scripts --upload -- ",
-    "uploadCartridge": "sgmf-scripts --uploadCartridge plugin_dynamicurl &&sgmf-scripts --uploadCartridge bm_dynamicurl_sitemap",
+    "uploadCartridge": "sgmf-scripts --uploadCartridge plugin_dynamicurl && sgmf-scripts --uploadCartridge bm_dynamicurl_sitemap",
     "lint:isml": "./node_modules/.bin/isml-linter",
     "build:isml": "./node_modules/.bin/isml-linter --build",
     "fix:isml": "./node_modules/.bin/isml-linter --autofix",
