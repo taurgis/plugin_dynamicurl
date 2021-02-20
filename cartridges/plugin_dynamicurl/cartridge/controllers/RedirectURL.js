@@ -5,6 +5,7 @@
  */
 
 var server = require('server');
+var cache = require('*/cartridge/scripts/middleware/cache');
 var base = module.superModule;
 
 /**
@@ -21,7 +22,7 @@ server.extend(base);
  * First checks if there is a Dynamic URL available before redirecting to the default behaviour. If a
  * URL is configured, it will be shown.
  */
-server.prepend('Start', function (req, res, next) {
+server.prepend('Start', cache.applyDefaultCache, function (req, res, next) {
     var { renderTemplate } = require('dw/template/ISML');
     var { getRedirectOrigin, getRedirect } = require('dw/web/URLRedirectMgr');
     var { getDynamicURL } = require('*/cartridge/scripts/managers/DynamicURLMgr');
