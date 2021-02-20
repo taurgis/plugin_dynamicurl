@@ -8,6 +8,10 @@
  * @constructor
  */
 function DynamicURL(dynamicURL) {
+    if (!dynamicURL) {
+        return;
+    }
+
     this.path = dynamicURL.custom.path;
     this.contentID = dynamicURL.custom.contentID;
     this.type = dynamicURL.custom.type.value;
