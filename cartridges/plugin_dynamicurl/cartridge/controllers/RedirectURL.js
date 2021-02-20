@@ -7,6 +7,14 @@
 var server = require('server');
 var base = module.superModule;
 
+/**
+ * This regex matches the standard 404 URL pattern configured in the Business Manager. Adapt
+ * this to your own project URL to keep this working.
+ *
+ * @type {RegExp}
+ */
+var REGEX_404 = /\/404/g;
+
 server.extend(base);
 
 /**
@@ -30,8 +38,9 @@ server.prepend('Start', function (req, res, next) {
         var redirect = getRedirect();
         var location = redirect ? redirect.location : null;
 
-        if (!location) {
+        if (!location || (location.match(REGEX_404).length > 0)) {
             res.setStatusCode(404);
+
             renderTemplate('dynamicurl/render', {
                 action: 'Home-ErrorNotFoundInclude'
             });

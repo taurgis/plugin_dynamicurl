@@ -24,7 +24,12 @@ server.get('ErrorNotFoundInclude', errorNotFoundChain[0]);
 errorNotFoundChain.forEach(function (chainItem, index) {
     // Ignore the first middleware, since it is already attached
     if (index > 0) {
-        server.append('ErrorNotFoundInclude', chainItem);
+        server.append('ErrorNotFoundInclude', chainItem, function (req, res, next) {
+            // Set status code to 200 as you are not allowed to include an URL that returns 404
+            res.setStatusCode(200);
+
+            next();
+        });
     }
 });
 

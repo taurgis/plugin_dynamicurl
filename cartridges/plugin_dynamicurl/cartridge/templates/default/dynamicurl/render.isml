@@ -1,5 +1,5 @@
 <isif condition="${pdict.dynamicURL}">
     <isinclude url="${URLUtils.url(pdict.action, 'cid', pdict.dynamicURL.contentID)}" sf-toolkit="on" />
-<iselse />
+<iselse/>
     <isinclude url="${URLUtils.url(pdict.action)}" sf-toolkit="on" />
 </isif>
