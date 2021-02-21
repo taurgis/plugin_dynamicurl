@@ -8,7 +8,12 @@ require('dw-api-mock/demandware-globals');
 require('app-module-path').addPath(process.cwd() + '/cartridges');
 
 const CustomObjectMgr = require('dw/object/CustomObjectMgr');
+
 CustomObjectMgr.queryCustomObject = sinon.stub();
+CustomObjectMgr.getAllCustomObjects = sinon.stub();
+
+const dummyCustomObject = {};
+set(dummyCustomObject, 'custom.type.value', null);
 
 const DynamicURLMgr = require('plugin_dynamicurl/cartridge/scripts/managers/DynamicURLMgr');
 
@@ -27,14 +32,40 @@ describe('DynamicURLMgr', () =>{
         });
 
         it('Should return a Dynamic URL model when the path given exists.', () => {
-            const dummyObject = {};
-            set(dummyObject, 'custom.type.value', null);
-
-            CustomObjectMgr.queryCustomObject.returns(dummyObject);
+            CustomObjectMgr.queryCustomObject.returns(dummyCustomObject);
 
             const result = DynamicURLMgr.getDynamicURL('existing-path');
 
             expect(result).to.not.be.null;
+        });
+    });
+
+    describe('getAllDynamicURLs', () => {
+        it('should return an empty array if there are no Dynamic URLs', () =>{
+            CustomObjectMgr.getAllCustomObjects.returns({
+                hasNext: () => false
+            });
+
+            const result = DynamicURLMgr.getAllDynamicURLs();
+
+            expect(result).to.be.length(0);
+        });
+
+        it('should return an array with all Dynamic URLs', () => {
+            const hasNextStub = sinon.stub();
+
+            CustomObjectMgr.getAllCustomObjects.returns({
+                hasNext: hasNextStub,
+                next: () => dummyCustomObject
+            });
+
+            hasNextStub.onCall(0).returns(true);
+            hasNextStub.onCall(1).returns(true);
+            hasNextStub.onCall(2).returns(false);
+
+            const result = DynamicURLMgr.getAllDynamicURLs();
+
+            expect(result).to.be.length(2);
         });
     });
 });
