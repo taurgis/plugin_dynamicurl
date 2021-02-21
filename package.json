@@ -19,6 +19,7 @@
     "url": "https://www.thomastheunen.eu"
   },
   "devDependencies": {
+    "app-module-path": "^2.2.0",
     "chai": "^4.3.0",
     "chai-subset": "^1.6.0",
     "dw-api-mock": "git+https://bitbucket.org/theunth/dw-api-mock.git",

@@ -28,13 +28,13 @@ set(dynamicURLMock, 'custom.type.value', 'my_type');
 
 describe('DynamicURL Model', () => {
     it('Should create an empty object if no Dynamic URL custom object is passed', () => {
-        var dynamicURL = new DynamicURL(null);
+        const dynamicURL = new DynamicURL(null);
 
         expect(dynamicURL).to.be.empty;
     });
 
     it('Should have the required properties, based on the given DynamicURL Custom Object.', () => {
-        var dynamicURL = new DynamicURL(dynamicURLMock);
+        const dynamicURL = new DynamicURL(dynamicURLMock);
 
         expect(dynamicURL.path).to.not.be.undefined;
         expect(dynamicURL.path).to.equal(dynamicURLMock.custom.path);
