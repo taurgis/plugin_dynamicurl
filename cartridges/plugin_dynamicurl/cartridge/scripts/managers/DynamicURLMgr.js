@@ -1,7 +1,7 @@
 'use strict';
 
 var DYNAMIC_URL = 'DynamicUrl';
-var CustomObjectMgr = require('dw/object/CustomObjectMgr');
+var { queryCustomObject, getAllCustomObjects } = require('dw/object/CustomObjectMgr');
 var DynamicURL = require('../../models/DynamicURL');
 
 /**
@@ -11,7 +11,7 @@ var DynamicURL = require('../../models/DynamicURL');
  * @returns {Object} - The Dynamic URL Object
  */
 function getDynamicURL(path) {
-    var customObject = CustomObjectMgr.queryCustomObject(DYNAMIC_URL, 'custom.path = {0}', path);
+    var customObject = queryCustomObject(DYNAMIC_URL, 'custom.path = {0}', path);
 
     if (customObject) {
         return new DynamicURL(customObject);
@@ -26,7 +26,7 @@ function getDynamicURL(path) {
  */
 function getAllDynamicURLs() {
     var dynamicUrls = [];
-    var customObjects = CustomObjectMgr.getAllCustomObjects(DYNAMIC_URL);
+    var customObjects = getAllCustomObjects(DYNAMIC_URL);
 
     while (customObjects.hasNext()) {
         dynamicUrls.push(new DynamicURL(customObjects.next()));

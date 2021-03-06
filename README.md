@@ -4,6 +4,7 @@ This is the repository for the plugin_dynamicurl plugin. This plugin enhances th
 
 * Give full control to content URLs
 * No longer need for the ID in the URL
+* 404 pages no longer redirect to a different page
 
 _Note: This is a POC project, so it is not finished and will not work for every project out of the box. It is simply a starting point._
 

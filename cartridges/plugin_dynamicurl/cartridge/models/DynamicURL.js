@@ -8,9 +8,13 @@
  * @constructor
  */
 function DynamicURL(dynamicURL) {
-    this.path = dynamicURL.custom.path;
-    this.contentID = dynamicURL.custom.contentID;
-    this.type = dynamicURL.custom.type.value;
+    if (!dynamicURL || !dynamicURL.custom) {
+        return;
+    }
+
+    this.path = dynamicURL.custom.path || null;
+    this.contentID = dynamicURL.custom.contentID || null;
+    this.type = dynamicURL.custom.type ? dynamicURL.custom.type.value : null;
 }
 
 module.exports = DynamicURL;
