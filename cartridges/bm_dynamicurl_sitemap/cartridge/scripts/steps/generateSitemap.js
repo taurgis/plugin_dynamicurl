@@ -41,7 +41,6 @@ function writeSiteMapUrlElement(xmlWriter, loc, changefreq, priority) {
     xmlWriter.writeEndElement();
 }
 
-
 /**
  * Write the found Dynamic URLs to a Sitemap compatible file.
  * @param {File} fileToSave - The Sitemap file
@@ -106,7 +105,6 @@ function generateSitemap(args) {
     if (!writeXML(fileToSave, dynamicURLs)) {
         return new Status(Status.ERROR, 'ERROR');
     }
-
 
     return new Status(Status.OK, 'OK');
 }

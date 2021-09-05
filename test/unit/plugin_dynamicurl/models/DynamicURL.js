@@ -25,7 +25,6 @@ set(dynamicURLMock, 'custom.path', 'my_path');
 set(dynamicURLMock, 'custom.contentID', 'my_content_id');
 set(dynamicURLMock, 'custom.type.value', 'my_type');
 
-
 describe('DynamicURL Model', () => {
     it('Should create an empty object if no Dynamic URL custom object is passed', () => {
         const dynamicURL = new DynamicURL(null);
